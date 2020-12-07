@@ -1,0 +1,41 @@
+{
+    "name": "ShowroomInput",
+    "maps": [
+        {
+            "name": "ShowroomControl",
+            "id": "503d0458-b1c4-4696-8be5-634303866c03",
+            "actions": [
+                {
+                    "name": "Rotate",
+                    "type": "Value",
+                    "id": "eda02587-628c-4345-b16d-704ab3ea7b7f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "New action",
+                    "type": "PassThrough",
+                    "id": "de22bc45-5378-482c-9583-04e44922ee84",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "37497549-b639-4299-9af3-7c47c96de673",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
