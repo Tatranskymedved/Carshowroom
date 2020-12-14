@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54784aefc66a9f7438b3e28f08c4aaef, type: 3}
+  m_Name: BodyPaintSO
+  m_EditorClassIdentifier: 
+  Name: 
+  targetMaterial: {fileID: 2100000, guid: e41ef62b4a27a44459c16a2b20475e87, type: 2}
+  metallicKey: _Metallic
+  smoothnessKey: _Glossiness
+  colorKey: _BaseColor
+  hueSlider: {fileID: 0}
+  valueLightnessSlider: {fileID: 0}
+  saturationSlider: {fileID: 0}
+  metallicSlider: {fileID: 0}
+  smoothnessSlider: {fileID: 0}
+  useHDR: 1

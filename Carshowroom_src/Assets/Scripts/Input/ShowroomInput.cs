@@ -33,6 +33,14 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""AutoRotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""93804045-6042-4e93-a1a2-e48f197deae1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -46,6 +54,127 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
                     ""action"": ""New action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""60114079-9f5e-4619-8095-08e176e1677f"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e0854a19-3eac-4101-abb8-72bd12fb4f55"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0a904169-8c0d-46d6-92e3-8ade7cb83cec"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""ed105820-0d0f-47da-8a78-aad959e7d657"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e1695bcf-f9bb-4a3a-9e6e-d6fd49c8bc3f"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""29f30e5d-b3b4-4488-958b-ce2dd1f3ace1"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""451f3cc9-f38b-4847-83cc-142f39ab945f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""178d1ce1-a52e-4e43-a50c-cff447535c53"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""06031d9c-af40-4848-91c7-56311b954acb"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""04f07107-7d9f-4dd8-a58b-98fbfaf909be"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ccdffea-9412-4442-ac87-c9a25def27c7"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AutoRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -56,6 +185,7 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
         m_ShowroomControl = asset.FindActionMap("ShowroomControl", throwIfNotFound: true);
         m_ShowroomControl_Rotate = m_ShowroomControl.FindAction("Rotate", throwIfNotFound: true);
         m_ShowroomControl_Newaction = m_ShowroomControl.FindAction("New action", throwIfNotFound: true);
+        m_ShowroomControl_AutoRotate = m_ShowroomControl.FindAction("AutoRotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -107,12 +237,14 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
     private IShowroomControlActions m_ShowroomControlActionsCallbackInterface;
     private readonly InputAction m_ShowroomControl_Rotate;
     private readonly InputAction m_ShowroomControl_Newaction;
+    private readonly InputAction m_ShowroomControl_AutoRotate;
     public struct ShowroomControlActions
     {
         private @ShowroomInput m_Wrapper;
         public ShowroomControlActions(@ShowroomInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Rotate => m_Wrapper.m_ShowroomControl_Rotate;
         public InputAction @Newaction => m_Wrapper.m_ShowroomControl_Newaction;
+        public InputAction @AutoRotate => m_Wrapper.m_ShowroomControl_AutoRotate;
         public InputActionMap Get() { return m_Wrapper.m_ShowroomControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -128,6 +260,9 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
                 @Newaction.started -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnNewaction;
                 @Newaction.performed -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnNewaction;
                 @Newaction.canceled -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnNewaction;
+                @AutoRotate.started -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnAutoRotate;
+                @AutoRotate.performed -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnAutoRotate;
+                @AutoRotate.canceled -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnAutoRotate;
             }
             m_Wrapper.m_ShowroomControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -138,6 +273,9 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
                 @Newaction.started += instance.OnNewaction;
                 @Newaction.performed += instance.OnNewaction;
                 @Newaction.canceled += instance.OnNewaction;
+                @AutoRotate.started += instance.OnAutoRotate;
+                @AutoRotate.performed += instance.OnAutoRotate;
+                @AutoRotate.canceled += instance.OnAutoRotate;
             }
         }
     }
@@ -146,5 +284,6 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
     {
         void OnRotate(InputAction.CallbackContext context);
         void OnNewaction(InputAction.CallbackContext context);
+        void OnAutoRotate(InputAction.CallbackContext context);
     }
 }
