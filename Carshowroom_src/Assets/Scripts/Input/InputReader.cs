@@ -7,6 +7,7 @@ public class InputReader : ScriptableObject, ShowroomInput.IShowroomControlActio
 {
     // Gameplay
     public event UnityAction<Vector2> cameraMoveEvent;
+    public FloatEventChannelSO cameraZoomEvent;
     public BoolStateSO cameraAutoRotateStateSO;
 
     private ShowroomInput showroomInput;
@@ -54,6 +55,15 @@ public class InputReader : ScriptableObject, ShowroomInput.IShowroomControlActio
         if(context.phase == InputActionPhase.Performed)
         {
             cameraAutoRotateStateSO?.Change();
+        }
+    }
+
+    public void OnZoom(InputAction.CallbackContext context)
+    {
+        if(cameraZoomEvent != null && context.phase == InputActionPhase.Performed)
+        {
+            var vec = context.ReadValue<Vector2>();
+            cameraZoomEvent.RaiseEvent(vec.y);
         }
     }
 }

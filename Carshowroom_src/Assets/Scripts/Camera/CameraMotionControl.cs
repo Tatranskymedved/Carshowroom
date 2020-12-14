@@ -45,13 +45,14 @@ public class CameraMotionControl : MonoBehaviour
     private float yRotationAxis = 0.0f;
     private float zoomVelocity = 0f;
     private float rotationSpeed = 0f;
+    private Vector2 cameraMovement = Vector2.zero;
 
     public InputReader inputReader;
-    private Vector2 cameraMvmnt = Vector2.zero;
 
     [Header("Listening on channels")]
     [Tooltip("The Camera control listens to this event, fired by objects in any scene, to adapt camera position")]
     [SerializeField] private BoolStateSO autoRotationStateSO = default;
+    [SerializeField] private FloatEventChannelSO zoomEventSO = default;
 
     public enum PanAxis
     {
@@ -79,7 +80,9 @@ public class CameraMotionControl : MonoBehaviour
             autoRotationStateSO.OnEventRaised += OnAutoRotationChanged;
             OnAutoRotationChanged(autoRotationStateSO.IsOn);
         }
-        if(inputReader != null)
+        if (zoomEventSO != null)
+            zoomEventSO.OnEventRaised += OnZoomChanged;
+        if (inputReader != null)
             inputReader.cameraMoveEvent += OnCameraMove;
     }
 
@@ -87,6 +90,8 @@ public class CameraMotionControl : MonoBehaviour
     {
         if (autoRotationStateSO != null)
             autoRotationStateSO.OnEventRaised -= OnAutoRotationChanged;
+        if (zoomEventSO != null)
+            zoomEventSO.OnEventRaised -= OnZoomChanged;
         if (inputReader != null)
             inputReader.cameraMoveEvent -= OnCameraMove;
     }
@@ -108,14 +113,11 @@ public class CameraMotionControl : MonoBehaviour
 
     private void Update()
     {
-        //transform.LookAt(target);
-        //transform.Translate(Vector3.right * Time.deltaTime);
         if (autoPan)
         {
             xVelocity += panSensitivity * Time.deltaTime;
         }
         PanAround();
-        Zoom();
     }
 
     private void LateUpdate()
@@ -143,17 +145,7 @@ public class CameraMotionControl : MonoBehaviour
 
     private void PanAround()
     {
-//#if UNITY_ANDROID || UNITY_IOS || UNITY_WSA
-//        Touch touch = Input.GetTouch(0);
-
-//        if (touch.phase == TouchPhase.Moved)
-//        {
-//            transform.RotateAround(target.position, target.up, cameraMvmnt.x * rotationSpeed);
-//            //transform.RotateAround(target.position, target.up, Input.GetAxis("Mouse X") * rotationSpeed);
-//        }
-//#endif
-
-//#if UNITY_EDITOR || UNITY_STANDALONE
+        //#if UNITY_EDITOR || UNITY_STANDALONE
         if (autoPan)
         {
             transform.RotateAround(target.position, rotationDirection, autoPanRotationSpeed * Time.smoothDeltaTime);
@@ -164,17 +156,17 @@ public class CameraMotionControl : MonoBehaviour
 
             //if (Input.GetMouseButton(0))
             //{
-                transform.LookAt(target);
-                transform.RotateAround(target.position, Vector3.up, cameraMvmnt.x * panSensitivity);
-                //transform.RotateAround(target.position, Vector3.up, Input.GetAxis("Mouse X") * panSensitivity);
+            transform.LookAt(target);
+            transform.RotateAround(target.position, Vector3.up, cameraMovement.x * panSensitivity);
+            //transform.RotateAround(target.position, Vector3.up, Input.GetAxis("Mouse X") * panSensitivity);
             //}
         }
-//#endif
+        //#endif
     }
 
     private void Zoom()
     {
-//#if UNITY_ANDROID || UNITY_IOS || UNITY_WSA
+        #if UNITY_ANDROID || UNITY_IOS || UNITY_WSA
         if (Input.touchCount == 2)
         {
             Touch touch0 = Input.GetTouch(0);
@@ -189,34 +181,7 @@ public class CameraMotionControl : MonoBehaviour
             cameraZDistance += deltaMagnitudeDiff * zoomSensitivity;
             cameraZDistance = Mathf.Clamp(cameraZDistance, cameraZoomRange.x, cameraZoomRange.y);
         }
-//#endif
-
-        //if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        //{
-        //    cameraZDistance = Mathf.SmoothDamp(cameraZDistance, cameraZDistance -= zoomSensitivity, ref zoomVelocity, Time.deltaTime * zoomSoothness);
-
-        //    if (cameraZDistance <= cameraZoomRange.x)
-        //    {
-        //        cameraZDistance = cameraZoomRange.x;
-        //    }
-        //}
-        //else
-        //{
-        //    if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        //    {
-        //        cameraZDistance = Mathf.SmoothDamp(cameraZDistance, cameraZDistance += zoomSensitivity, ref zoomVelocity, Time.deltaTime * zoomSoothness);
-
-        //        if (cameraZDistance >= cameraZoomRange.y)
-        //        {
-        //            cameraZDistance = cameraZoomRange.y;
-        //        }
-        //    }
-        //}
-
-        //if (Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetAxis("Mouse ScrollWheel") < 0)
-        //{
-        //    cam.fieldOfView = cameraZDistance;
-        //}
+        #endif
     }
 
     public void AdjustPanSensitivity(float _sensitivity)
@@ -238,12 +203,12 @@ public class CameraMotionControl : MonoBehaviour
         return Mathf.Clamp(angle, min, max);
     }
 
-    private void OnCameraMove(Vector2 cameraMovement)
+    private void OnCameraMove(Vector2 cameraMove)
     {
-        cameraMvmnt = cameraMovement;
+        cameraMovement = cameraMove;
 
-        xVelocity += cameraMovement.x * panSensitivity;
-        yVelocity -= cameraMovement.y * panSensitivity;
+        xVelocity += cameraMove.x * panSensitivity;
+        yVelocity -= cameraMove.y * panSensitivity;
         //if (cameraMovementLock)
         //    return;
 
@@ -254,5 +219,13 @@ public class CameraMotionControl : MonoBehaviour
         //freeLookVCam.m_YAxis.m_InputAxisValue = cameraMovement.y * Time.smoothDeltaTime * speed;
     }
 
+    private void OnZoomChanged(float zoomValue)
+    {
+        if (zoomValue == 0f) return;
 
+        float modifier = zoomValue > 0f ? -1f : 1f;
+        cameraZDistance = Mathf.SmoothDamp(cameraZDistance, cameraZDistance += zoomSensitivity * modifier, ref zoomVelocity, Time.deltaTime * zoomSoothness);
+        cameraZDistance = Mathf.Clamp(cameraZDistance, cameraZoomRange.x, cameraZoomRange.y);
+        cam.fieldOfView = cameraZDistance;
+    }
 }

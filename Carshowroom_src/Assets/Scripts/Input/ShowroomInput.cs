@@ -41,6 +41,14 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""26a61c15-5ef8-472a-a2ea-dd4eb9ebf8cd"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -175,6 +183,17 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
                     ""action"": ""AutoRotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""151f187a-901a-482d-9ba9-19cca9edb8e4"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -186,6 +205,7 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
         m_ShowroomControl_Rotate = m_ShowroomControl.FindAction("Rotate", throwIfNotFound: true);
         m_ShowroomControl_Newaction = m_ShowroomControl.FindAction("New action", throwIfNotFound: true);
         m_ShowroomControl_AutoRotate = m_ShowroomControl.FindAction("AutoRotate", throwIfNotFound: true);
+        m_ShowroomControl_Zoom = m_ShowroomControl.FindAction("Zoom", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -238,6 +258,7 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
     private readonly InputAction m_ShowroomControl_Rotate;
     private readonly InputAction m_ShowroomControl_Newaction;
     private readonly InputAction m_ShowroomControl_AutoRotate;
+    private readonly InputAction m_ShowroomControl_Zoom;
     public struct ShowroomControlActions
     {
         private @ShowroomInput m_Wrapper;
@@ -245,6 +266,7 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
         public InputAction @Rotate => m_Wrapper.m_ShowroomControl_Rotate;
         public InputAction @Newaction => m_Wrapper.m_ShowroomControl_Newaction;
         public InputAction @AutoRotate => m_Wrapper.m_ShowroomControl_AutoRotate;
+        public InputAction @Zoom => m_Wrapper.m_ShowroomControl_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_ShowroomControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -263,6 +285,9 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
                 @AutoRotate.started -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnAutoRotate;
                 @AutoRotate.performed -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnAutoRotate;
                 @AutoRotate.canceled -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnAutoRotate;
+                @Zoom.started -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnZoom;
+                @Zoom.performed -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnZoom;
+                @Zoom.canceled -= m_Wrapper.m_ShowroomControlActionsCallbackInterface.OnZoom;
             }
             m_Wrapper.m_ShowroomControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -276,6 +301,9 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
                 @AutoRotate.started += instance.OnAutoRotate;
                 @AutoRotate.performed += instance.OnAutoRotate;
                 @AutoRotate.canceled += instance.OnAutoRotate;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
             }
         }
     }
@@ -285,5 +313,6 @@ public class @ShowroomInput : IInputActionCollection, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnNewaction(InputAction.CallbackContext context);
         void OnAutoRotate(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
 }
