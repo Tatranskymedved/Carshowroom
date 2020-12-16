@@ -574,9 +574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Auto-rotate
-
-'
+  m_text: Auto-<u>R</u>otate
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -31199,7 +31197,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Left door
+  m_text: '<u>L</u>eft door
 
 '
   m_isRightToLeft: 0
@@ -32122,13 +32120,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.09845746, y: 0.55822515, z: -0.067404255, w: 0.82106483}
-  m_LocalPosition: {x: -5.67, y: 4.06, z: -3.3100004}
+  m_LocalRotation: {x: -0.012177251, y: 0.98799324, z: -0.118696794, w: -0.09814337}
+  m_LocalPosition: {x: -0.31, y: 1.23, z: 5.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1959922207}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 13.706, y: -291.583, z: -0.045}
+  m_LocalEulerAnglesHint: {x: 13.706, y: -168.66, z: -0.045}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32153,10 +32151,10 @@ MonoBehaviour:
   cameraZoomRange: {x: 10, y: 60}
   zoomSoothness: 0.1
   zoomSensitivity: 2
-  inputReader: {fileID: 11400000, guid: fec6099252c9f0b46abe4a1094e40aba, type: 2}
   autoRotationStateSO: {fileID: 11400000, guid: d5f7d98ceb23e4b45be9c0799565cfc1,
     type: 2}
   zoomEventSO: {fileID: 11400000, guid: 58fd33218a3d7fc4f8cb760b9185b1d3, type: 2}
+  cameraMoveEventSO: {fileID: 11400000, guid: cb080cb61d561f747ae6372279ed6506, type: 2}
 --- !u!1 &1002037934
 GameObject:
   m_ObjectHideFlags: 0

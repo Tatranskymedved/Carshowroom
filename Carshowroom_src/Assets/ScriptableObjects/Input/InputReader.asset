@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ddee357aaddc8e46b1181a7b9c6fe0d, type: 3}
   m_Name: InputReader
   m_EditorClassIdentifier: 
+  cameraMoveEvent: {fileID: 11400000, guid: cb080cb61d561f747ae6372279ed6506, type: 2}
   cameraZoomEvent: {fileID: 11400000, guid: 58fd33218a3d7fc4f8cb760b9185b1d3, type: 2}
   cameraAutoRotateStateSO: {fileID: 11400000, guid: d5f7d98ceb23e4b45be9c0799565cfc1,
+    type: 2}
+  leftDoorOpenStateSO: {fileID: 11400000, guid: 4d303fe8e04baf743a7454db0b9c5047,
     type: 2}

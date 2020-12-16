@@ -47,12 +47,11 @@ public class CameraMotionControl : MonoBehaviour
     private float rotationSpeed = 0f;
     private Vector2 cameraMovement = Vector2.zero;
 
-    public InputReader inputReader;
-
     [Header("Listening on channels")]
     [Tooltip("The Camera control listens to this event, fired by objects in any scene, to adapt camera position")]
     [SerializeField] private BoolStateSO autoRotationStateSO = default;
     [SerializeField] private FloatEventChannelSO zoomEventSO = default;
+    [SerializeField] private Vector2EventChannelSO cameraMoveEventSO = default;
 
     public enum PanAxis
     {
@@ -82,8 +81,8 @@ public class CameraMotionControl : MonoBehaviour
         }
         if (zoomEventSO != null)
             zoomEventSO.OnEventRaised += OnZoomChanged;
-        if (inputReader != null)
-            inputReader.cameraMoveEvent += OnCameraMove;
+        if (cameraMoveEventSO != null)
+            cameraMoveEventSO.OnEventRaised += OnCameraMove;
     }
 
     private void OnDisable()
@@ -92,8 +91,8 @@ public class CameraMotionControl : MonoBehaviour
             autoRotationStateSO.OnEventRaised -= OnAutoRotationChanged;
         if (zoomEventSO != null)
             zoomEventSO.OnEventRaised -= OnZoomChanged;
-        if (inputReader != null)
-            inputReader.cameraMoveEvent -= OnCameraMove;
+        if (cameraMoveEventSO != null)
+            cameraMoveEventSO.OnEventRaised -= OnCameraMove;
     }
 
     private void OnAutoRotationChanged(bool value)

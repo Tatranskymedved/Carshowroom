@@ -6,9 +6,10 @@ using UnityEngine.Events;
 public class InputReader : ScriptableObject, ShowroomInput.IShowroomControlActions
 {
     // Gameplay
-    public event UnityAction<Vector2> cameraMoveEvent;
+    public Vector2EventChannelSO cameraMoveEvent;
     public FloatEventChannelSO cameraZoomEvent;
     public BoolStateSO cameraAutoRotateStateSO;
+    public BoolStateSO leftDoorOpenStateSO;
 
     private ShowroomInput showroomInput;
 
@@ -27,10 +28,6 @@ public class InputReader : ScriptableObject, ShowroomInput.IShowroomControlActio
         DisableAllInput();
     }
 
-    public void OnLook(InputAction.CallbackContext context)
-    {
-    }
-
     public void EnableBasicInput()
     {
         showroomInput.Enable();
@@ -43,11 +40,7 @@ public class InputReader : ScriptableObject, ShowroomInput.IShowroomControlActio
 
     public void OnRotate(InputAction.CallbackContext context)
     {
-        cameraMoveEvent?.Invoke(context.ReadValue<Vector2>());
-    }
-
-    public void OnNewaction(InputAction.CallbackContext context)
-    {
+        cameraMoveEvent?.RaiseEvent(context.ReadValue<Vector2>());
     }
 
     public void OnAutoRotate(InputAction.CallbackContext context)
@@ -64,6 +57,14 @@ public class InputReader : ScriptableObject, ShowroomInput.IShowroomControlActio
         {
             var vec = context.ReadValue<Vector2>();
             cameraZoomEvent.RaiseEvent(vec.y);
+        }
+    }
+
+    public void OnOnLeftDoorOpen(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            leftDoorOpenStateSO?.Change();
         }
     }
 }

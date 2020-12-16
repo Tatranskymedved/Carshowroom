@@ -41,11 +41,12 @@ public class AnimatorManager : MonoBehaviour
     void Start()
     {
         anim = FindObjectOfType<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        if (leftFrontDoorOpen)
+            OnLeftFrontDoorOpen(leftFrontDoorOpen.IsOn);
+        if (rightFrontDoorOpen)
+            OnRightFrontDoorOpen(rightFrontDoorOpen.IsOn);
+        if (rearDoorsOpen)
+            OnRearDoorsOpen(rearDoorsOpen.IsOn);
     }
 
     private void OnLeftFrontDoorOpen(bool arg)
