@@ -256,6 +256,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c95d80d8e1a19904fb4ab1f76c6f51c3, type: 2}
   - {fileID: 11400000, guid: 384059d6d1d82ec4f992cd6fd4b7b1a5, type: 2}
   - {fileID: 11400000, guid: 06c3e90ad39c3ea46a117649ed17527a, type: 2}
+  - {fileID: 11400000, guid: c48a40d35e50db046b15570f84cfd8f6, type: 2}
   hueSlider: {fileID: 1466823386}
   valueSlider: {fileID: 721458300}
   saturationSlider: {fileID: 2084870282}

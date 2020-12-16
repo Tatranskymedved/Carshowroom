@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54784aefc66a9f7438b3e28f08c4aaef, type: 3}
-  m_Name: Rim1SO
+  m_Name: ChromePaintSO
   m_EditorClassIdentifier: 
-  Name: Rim 1
-  targetMaterial: {fileID: 2100000, guid: 54585b54e680af04ca9843ae192a576a, type: 2}
+  Name: Chrome Paint
+  targetMaterial: {fileID: 2100000, guid: 42ef52f9535e1614eb5e6c3e37549750, type: 2}
   useHDR: 1
-  hue: 0.7301831
-  saturation: 0.4781578
-  colorValue: 0.8639743
+  hue: 0.2167983
+  saturation: 0.023890056
+  colorValue: 0.49682632
