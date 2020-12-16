@@ -1,6 +1,9 @@
 # Carshowroom
 
-Simple Car-showroom to test out VR & provide Virtuplex with example of source code.
+Simple test Car-showroom.
+
+![Image example](docs/img/CarshowroomExample.PNG?raw=true "Carshowroom example")
+
 
 ## Initial materials
 
