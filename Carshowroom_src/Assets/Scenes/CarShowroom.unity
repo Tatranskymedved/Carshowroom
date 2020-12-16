@@ -32322,7 +32322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoPan: 1
   rotationDirection: {x: 0, y: 1, z: 0}
-  autoPanRotationSpeed: 0.2
+  autoPanRotationSpeed: 0.3
   rotationSmoothing: 2
   target: {fileID: 669975085}
   panSensitivity: 1
