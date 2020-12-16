@@ -2,3 +2,7 @@
 
 # Visual Studio cache directory
 .vs/
+
+# Builds
+/[Bb]uild/
+/[Bb]uilds/
