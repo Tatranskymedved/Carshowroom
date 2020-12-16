@@ -16,3 +16,4 @@ At the start I've been provided with Mazda car model which includes following:
 - Used script for camera system from similar project: https://github.com/LiberalMiser/Colour-Picker
 - VectorRangeAttribute from https://gist.github.com/DGoodayle/69c9c06eb0a277d833c5
 - Some parts of events/messaging from https://github.com/UnityTechnologies/open-project-1
+- PostProcessing stack from Unity
