@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54784aefc66a9f7438b3e28f08c4aaef, type: 3}
   m_Name: Rim2SO
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Rim 2
   targetMaterial: {fileID: 2100000, guid: 8b165ed24ab972044b9368eb135de8e6, type: 2}
-  metallicKey: _Metallic
-  smoothnessKey: _Glossiness
-  colorKey: _BaseColor
+  cMetallicKey: _Metallic
+  cSmoothKey: _Glossiness
+  cColorKey: _BaseColor
   hueSlider: {fileID: 0}
   valueLightnessSlider: {fileID: 0}
   saturationSlider: {fileID: 0}

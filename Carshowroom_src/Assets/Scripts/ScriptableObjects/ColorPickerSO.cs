@@ -1,80 +1,52 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "ColorPicker", menuName = "Game/Color Picker")]
 public class ColorPickerSO : ScriptableObject
 {
     public string Name;
-    [SerializeField] private Material targetMaterial;
-    [SerializeField] private string cMetallicKey = "_Metallic";
-    [SerializeField] private string cSmoothKey = "_Glossiness";
-    [SerializeField] private string cColorKey = "_BaseColor";
+    
+    public Material targetMaterial;
+    public bool useHDR = true;
+    public float hue, saturation, colorValue;
 
-    [SerializeField] private Slider hueSlider, valueLightnessSlider, saturationSlider, metallicSlider, smoothnessSlider;
-
-    [SerializeField] private bool useHDR = true;
-
-    private float hue, saturation, colourValue;
-
-    public void SetDefault()
+    public void GetHSVFromMaterial()
     {
-        this.InitColorSliderPositions();
-        this.InitMetallicSliderPosition();
-        this.InitSmoothnessSliderPosition();
+        if (targetMaterial == null) return;
+
+        Color.RGBToHSV(targetMaterial.color, out hue, out saturation, out colorValue);
     }
 
-    public void UpdateColor()
+    public void UpdateResultImageWithColor(Image img)
     {
-        Color color = Color.HSVToRGB(hue, saturation, colourValue, useHDR);
-        targetMaterial.SetColor(cColorKey, color);
+        if (targetMaterial == null) return;
+        if (img == null) return;
+
+        img.color = targetMaterial.color;
     }
 
-    public void SetHue(float val)
+    public void UpdateHueSlider(Slider slider)
     {
-        hue = val;
-        this.UpdateColor();
+        if (targetMaterial == null) return;
+        if (slider == null) return;
+
+        slider.value = hue;
     }
 
-    public void SetSaturation(float val)
+    public void UpdateSaturationSlider(Slider slider)
     {
-        saturation = val;
-        this.UpdateColor();
+        if (targetMaterial == null) return;
+        if (slider == null) return;
+
+        slider.value = saturation;
     }
 
-    public void SetColorValue(float val)
+    public void UpdateLightnessSlider(Slider slider)
     {
-        colourValue = val;
-        this.UpdateColor();
+        if (targetMaterial == null) return;
+        if (slider == null) return;
+
+        slider.value = colorValue;
     }
-
-    public void SetMetallicValue(float val)
-    {
-        targetMaterial.SetFloat(cMetallicKey, val);
-    }
-
-    public void SetSmoothnessValue(float val)
-    {
-        targetMaterial.SetFloat(cSmoothKey, val);
-    }
-
-    private void InitColorSliderPositions()
-    {
-        Color materialStartColour = targetMaterial.GetColor(cColorKey);
-        Color.RGBToHSV(materialStartColour, out float h, out float s, out float v);
-
-        hueSlider.value = h;
-        saturationSlider.value = s;
-        valueLightnessSlider.value = v;
-    }
-
-    private void InitSmoothnessSliderPosition()
-    {
-        smoothnessSlider.value = targetMaterial.GetFloat(cSmoothKey);
-    }
-
-    private void InitMetallicSliderPosition()
-    {
-        metallicSlider.value = targetMaterial.GetFloat(cMetallicKey);
-    }
-
 }
